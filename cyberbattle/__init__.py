@@ -121,3 +121,20 @@ register(
             'maximum_total_credentials': 50000
             }
 )
+
+if 'CyberBattlePrivilegeEscalation-v0' in registry.env_specs:
+    del registry.env_specs['CyberBattlePrivilegeEscalation-v0']
+
+register(
+    id='CyberBattlePrivilegeEscalation-v0',
+    cyberbattle_env_identifiers=chainpattern.ENV_IDENTIFIERS,
+    entry_point='cyberbattle._env.cyberbattle_privilege_escalation:CyberBattlePrivilegeEscalation',
+    kwargs={
+            'defender_agent': None,
+            'attacker_goal': AttackerGoal(own_atleast_percent=1.0),
+            'defender_goal': DefenderGoal(eviction=True),
+            'winning_reward': 5000.0,
+            'losing_reward': 0.0
+            },
+    reward_threshold=2200,
+)
